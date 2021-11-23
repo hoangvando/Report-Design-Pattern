@@ -35,3 +35,21 @@ class NyPizzaFactory : PizzaFactory
         protected override Pizza Create(string type) {}
     }
 ```
+## 3. Builder
+- Builder là một mẫu thiết kế sáng tạo cho phép bạn xây dựng các đối tượng phức tạp theo từng bước. Mẫu cho phép bạn tạo ra các kiểu và hình ảnh đại diện khác nhau của một đối tượng bằng cách sử dụng cùng một mã xây dựng.
+- Khởi tạo interface IBuilder:
+```
+public interface IBuilder
+    {
+        void AddIngredients();
+        void AddShape();
+        void AddSize();
+        void Reset();
+        Hamburger Build();
+    }
+```
+- Các lớp MyHamburgerBuilder, WifesHamburgerBuilder kế thừa các thuộc tính trong lớp IBuilder. Tách tiến trình xây dựng 1 đối tượng phức tạp sao cho một tiến trình tạo được các biểu diễn khác nhau 
+=> Builder Design Pattern
+## 4. Prototype Pattern
+- Prototype là một mẫu thiết kế sáng tạo cho phép bạn sao chép các đối tượng hiện có mà không làm cho mã của bạn phụ thuộc vào các lớp của chúng.
+- Khởi tạo `interface IFigure : ICloneable` 
