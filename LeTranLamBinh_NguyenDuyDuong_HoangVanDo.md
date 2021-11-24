@@ -6,8 +6,8 @@
 ## Link
 * Link Github Project: https://github.com/abishekaditya/DesignPatterns
 * Link mẫu chuẩn: https://refactoring.guru/design-patterns/java
-# Creational Patterns
-## 1. Abstract Factory
+# 1. Creational Patterns
+## 1.1 Abstract Factory
 - Là một mẫu thiết kế sáng tạo cho phép bạn tạo ra các họ các đối tượng liên quan mà không cần chỉ định các lớp cụ thể của chúng.
 - Code: [Abstract Factory](https://github.com/abishekaditya/DesignPatterns/tree/master/FactoryPattern/Abstract%20Factory)
 - Ở đây, cung cấp một interface cho việc tạo lập các đối tượng (có liên hệ với nhau) mà không cần qui định lớp khi hay xác định lớp cụ thể (concrete) tạo mỗi đối tượng, 2 class được khai báo theo mẫu chuẩn.
@@ -16,10 +16,10 @@ internal class ChicagoIngredientsFactory : IIngredientsFactory
 internal class NyIngredientsFactory : IIngredientsFactory
 ```
 
-## 2. Factory Method
+## 1.2 Factory Method
 - Là một mẫu thiết kế sáng tạo cung cấp một giao diện để tạo các đối tượng trong lớp cha, nhưng cho phép các lớp con thay đổi loại đối tượng sẽ được tạo.
 - Code: [Factory Method](https://github.com/abishekaditya/DesignPatterns/tree/master/FactoryPattern/Factory%20Method)
-- 
+- Lớp tạo khai báo phương thức gốc phải trả về một đối tượng của một lớp sản phẩm. Các lớp con ChicagoPizzaFactory, NyPizzaFactory cung cấp việc triển khai phương thức này.
 ```
 abstract class PizzaFactory
     {
@@ -35,8 +35,9 @@ class NyPizzaFactory : PizzaFactory
         protected override Pizza Create(string type) {}
     }
 ```
-## 3. Builder
+## 1.3 Builder
 - Builder là một mẫu thiết kế sáng tạo cho phép bạn xây dựng các đối tượng phức tạp theo từng bước. Mẫu cho phép bạn tạo ra các kiểu và hình ảnh đại diện khác nhau của một đối tượng bằng cách sử dụng cùng một mã xây dựng.
+- Code: [Builder](https://github.com/abishekaditya/DesignPatterns/tree/master/BuilderPattern)
 - Khởi tạo interface IBuilder:
 ```
 public interface IBuilder
@@ -50,7 +51,7 @@ public interface IBuilder
 ```
 - Các lớp MyHamburgerBuilder, WifesHamburgerBuilder kế thừa các thuộc tính trong lớp IBuilder. Tách tiến trình xây dựng 1 đối tượng phức tạp sao cho một tiến trình tạo được các biểu diễn khác nhau 
 => Builder Design Pattern
-## 4. Prototype Pattern
+## 1.4 Prototype Pattern
 - Prototype là một mẫu thiết kế sáng tạo cho phép bạn sao chép các đối tượng hiện có mà không làm cho mã của bạn phụ thuộc vào các lớp của chúng.
 - Code: [Prototype Pattern](https://github.com/abishekaditya/DesignPatterns/tree/master/PrototypePattern)
 - Khởi tạo `interface IFigure : ICloneable` dùng làm đối tượng mẫu để quy định các loại đối tượng của lớp Circle và Rectangle, hai lớp đó kế thừa lớp IFigure. Tất cả các lớp sau tuân theo cùng một interface, cung cấp một phương thức clone().
@@ -74,7 +75,7 @@ class Rectangle : IFigure
  ```
  - Giống với mẫu chuẩn trong [Prototype Pattern](https://refactoring.guru/design-patterns/prototype)
  
- ## 5. Singleton
+ ## 1.5 Singleton
  - Singleton cho phép đảm bảo rằng một lớp chỉ có một thể hiện, đồng thời cung cấp một điểm truy cập toàn cục cho thể hiện này.
  - Code: [Singleton](https://github.com/abishekaditya/DesignPatterns/tree/master/SingletonPattern)
  - Class `ChocolateBoiler` được khởi tạo là `internal partial class ChocolateBoiler`, bên trong là phương thức khởi tạo tĩnh và phương thức khởi tạo private.
@@ -106,8 +107,8 @@ class Rectangle : IFigure
  ```
  - Giống với mẫu chuẩn trong [Singleton](https://refactoring.guru/design-patterns/singleton)
  
- # Behavioral Patterns
- ## 1. Chain of Responsibility
+ # 2. Behavioral Patterns
+ ## 2.1 Chain of Responsibility
  - cho phép chuyển các yêu cầu dọc theo một chuỗi các trình xử lý. Khi nhận được yêu cầu, mỗi trình xử lý sẽ quyết định xử lý yêu cầu hoặc chuyển nó cho trình xử lý tiếp theo trong chuỗi.
  - Code: [Chain of Responsibility](https://github.com/abishekaditya/DesignPatterns/tree/master/ChainOfResponsibilityPattern)
  ```
@@ -134,7 +135,7 @@ public class MultiplicationHandler : BaseHandler {
 ```
 - Không có sự thay đổi so với mẫu chuẩn [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility)
 
-## 2. Command
+## 2.2 Command
 - Command biến một yêu cầu thành một đối tượng độc lập chứa tất cả thông tin về yêu cầu. Sự chuyển đổi này cho phép bạn chuyển các yêu cầu dưới dạng đối số của phương thức, trì hoãn hoặc xếp hàng đợi việc thực hiện một yêu cầu và hỗ trợ các hoạt động hoàn tác.
 - Code: 
 - The base command class xác định giao diện chung cho các concrete commands.
