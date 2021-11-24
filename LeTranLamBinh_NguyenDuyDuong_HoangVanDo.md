@@ -307,3 +307,144 @@ static class Program
 ```
 
 Kết luận: Sử dụng mẫu Composite để quản lý các loại Menu, cây tạo ra đơn giản dễ hiểu và hiệu quả.
+
+## 3.4 Facade
+
+Được dùng tại [FacadePattern.](https://github.com/abishekaditya/DesignPatterns/tree/master/FacadePattern)
+
+**Facade** tương ứng với class *HomeTheatreFacade* được dùng để ... gồm các **Subsystem class** : *Dimmer*, *Dvd* và *DvdPlayer*. Với Dimmer quản lý độ sáng của màn hình, Dvd quản lý các moive, DvdPlayer quản lý các tác vụ điều khiển khi xem phim (ví dụ bật, dừng phim).
+
+Kết luận: Author đã sử dụng mẫu Facade để thiết kế các class quản lý từng tác vụ được quản lý chung bới class *HomeTheatreFacade* khi đó Client chỉ cần thao tác với *HomeTheatreFacade* để sử dụng các chứ năng được cung cấp bởi tất cả các subsystem.
+Ví dụ trong program.cs:
+```
+    internal static class Program
+    {
+        private static void Main()
+        {
+            var dimmer = new Dimmer();
+            var dvdPlayer = new DvdPlayer();
+            var dvd = new Dvd("Gone with the Wind 2 : Electric Bugaloo");
+            var homeTheater = new HomeTheatreFacade(dimmer, dvd, dvdPlayer);
+
+            homeTheater.WatchMovie();
+            Console.WriteLine();
+            homeTheater.Pause();
+            Console.WriteLine();
+            homeTheater.Resume();
+            Console.WriteLine();
+            homeTheater.Pause();
+        }
+    }
+```
+
+## 3.5 Decorator
+Được sử dụng tại [DecoratorPattern](https://github.com/abishekaditya/DesignPatterns/tree/master/DecoratorPattern)
+
+**Component** tương ứng là abstract class *Beverage* khai báo các method chung cho quá trình bao bọc (Mix đồ uống - Description và giá thành - Cost) và đối tượng là đồ uống:
+
+```
+    abstract class Beverage
+    {
+        protected string _description = "No Description";
+        public abstract string Description { get; }
+        public abstract double Cost();
+    }
+```
+Các **Concrete Component** là các class Espresso, DrakRoast, HouseBlend. Là các đối tượng đồ uống xác định.
+ví dụ Espresso.cs
+```
+class Espresso : Beverage
+    {
+        public Espresso()
+        {
+            _description = "Espresso";
+        }
+
+        public override string Description => _description;
+
+        public override double Cost()
+        {
+            return 1.99;
+        }
+    }
+```
+
+**Base Decorator** tương ứng là *Condiment Decorator* có các **Concrete Decorator** tương ứng là  *MochaCondiment*  *WhipCondiment* quản lý việc bổ sung các loại condiment cho đồ uống. 
+
+Điểm khác: Component được sử dụng là abstract class thay vì interface như trong mẫu.
+
+## 3.6 Flyweight
+Được sử dụng tại [FlyweightPattern](https://github.com/abishekaditya/DesignPatterns/tree/master/FlyweightPattern)
+
+IBeverage  OolingMilkTea FoamMilkTea CoconutMilkTea BubbleMilkTea 
+
+**Flyweight Factory** tương ứng là class *BubbleTeaShop* đại diện cho một cửa hàng đồ uống quản lý các loại đồ uống - Enumerate(), các hóa đơn - TakeOrders():
+```
+    private void TakeOrders()
+        {
+            var factory = new BeverageFlyweightFactory();
+
+            takeAwayOrders.Add(factory.MakeBeverage(BeverageType.BubbleMilk));
+            takeAwayOrders.Add(factory.MakeBeverage(BeverageType.BubbleMilk));
+            takeAwayOrders.Add(factory.MakeBeverage(BeverageType.CoconutMilk));
+            takeAwayOrders.Add(factory.MakeBeverage(BeverageType.FoamMilk));
+            takeAwayOrders.Add(factory.MakeBeverage(BeverageType.OolongMilk));
+            takeAwayOrders.Add(factory.MakeBeverage(BeverageType.OolongMilk));
+        }
+
+        public void Enumerate()
+        {
+            Console.WriteLine("Enumerating take away orders\n");
+            foreach (var beverage in takeAwayOrders)
+            {
+                beverage.Drink();
+            }
+        }
+```
+Có 4 loại đồ uống có khác nhau tương ứng với 4 **Context** :  *BubbleMilk, FoamMilk, OolongMilk, CoconutMilk* có **Flyweight** là *IBeverage*.
+
+Kết luận: Tương đồng với mẫu thiết ké nhưng chưa thể hiện rõ các repeatingState và uniquaState.
+
+## 3.7 Proxy
+Được sử dụng tại [ProxyPattern](https://github.com/abishekaditya/DesignPatterns/tree/master/ProxyPattern)
+
+**Service** là RealImg
+```
+    public class RealImage : Image
+    {
+
+        private string _fileName;
+
+        public RealImage(string fileName)
+        {
+            _fileName = fileName;
+            loadFromDisk(_fileName);
+        }
+
+        public void display()
+        {
+            Console.WriteLine("Displaying " + _fileName);
+        }
+
+        private void loadFromDisk(string fileName)
+        {
+            Console.WriteLine("Loading " + fileName);
+        }
+    }
+```
+**Service Interface** tương ứng là class Image cung cấp service display() của class RealImg. Và **Proxy** tương ứng là ProxyImg tham chiếu đến display().
+```
+    public class ProxyImage : Image
+    {
+    ...
+        public void display()
+        {
+            if (_realImage == null)
+            {
+                _realImage = new RealImage(_fileName);
+            }
+            _realImage.display();
+        }
+    }
+```
+Kết luận: hoàn toàn tương đồng với mẫu thiết kế, không có sự khác biệt.
