@@ -135,5 +135,31 @@ public class MultiplicationHandler : BaseHandler {
 - Không có sự thay đổi so với mẫu chuẩn [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility)
 
 ## 2. Command
-- 
- 
+- Command biến một yêu cầu thành một đối tượng độc lập chứa tất cả thông tin về yêu cầu. Sự chuyển đổi này cho phép bạn chuyển các yêu cầu dưới dạng đối số của phương thức, trì hoãn hoặc xếp hàng đợi việc thực hiện một yêu cầu và hỗ trợ các hoạt động hoàn tác.
+- Code: 
+- The base command class xác định giao diện chung cho các concrete commands.
+```
+internal interface ICommand
+    {
+        void Execute();
+        void Undo();
+    }
+```
+- The concrete commands:
+```
+internal class GarageDoorCloseCommand : ICommand
+    {
+        public GarageDoorCloseCommand(Garage g) {...}
+        public void Execute() {}
+        public void Undo() {}
+    }
+internal class GarageDoorOpenCommand : ICommand
+    {
+        public GarageDoorOpenCommand(Garage g) {...}
+        public void Execute() {}
+        public void Undo() {}
+    }
+v.v.....
+```
+- Tất cả các class GarageDoorCloseCommand, GarageDoorOpenCommand, LightOffCommand, LightOnCommand, MacroCommand, NoCommand, .... đều đưuọc xác định từ ICommand nhưng là những đối tượng độc lập, chứa các yêu cầu Execute(), Undo().
+- Không có thay đổi so với mẫu chuẩn [Command](https://refactoring.guru/design-patterns/command)
