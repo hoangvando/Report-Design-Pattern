@@ -591,3 +591,6 @@ Kết luận: Tương đồng với mẫu thiết ké nhưng chưa thể hiện 
     }
 ```
 Kết luận: hoàn toàn tương đồng với mẫu thiết kế, không có sự khác biệt.
+
+
+# Kết Luận: **Tất cả các mẫu thiết kế trên giống, không có nhiều thay đổi so với 23 mẫu thiết kế chuẩn**
