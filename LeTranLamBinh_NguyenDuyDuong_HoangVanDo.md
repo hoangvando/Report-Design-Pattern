@@ -109,25 +109,31 @@ class Rectangle : IFigure
  # Behavioral Patterns
  ## 1. Chain of Responsibility
  - cho phép chuyển các yêu cầu dọc theo một chuỗi các trình xử lý. Khi nhận được yêu cầu, mỗi trình xử lý sẽ quyết định xử lý yêu cầu hoặc chuyển nó cho trình xử lý tiếp theo trong chuỗi.
- - Code: 
+ - Code: [Chain of Responsibility](https://github.com/abishekaditya/DesignPatterns/tree/master/ChainOfResponsibilityPattern)
  ```
+ // Giao diện trình xử lý khai báo một phương pháp để xây dựng một chuỗi trình xử lý. Nó cũng khai báo phương thức để thực hiện một yêu cầu.
 public interface IHandler {
         void AddChain(IHandler handler);
-        double? Handle(double[] values, string action);
+        double Handle(double[] values, string action);
     }
+    
+// The base class for simple components.
 public abstract class BaseHandler : IHandler {
         public void AddChain(IHandler handler) {
             _nextInLine = handler;    
         }
 
-        public abstract double? Handle(double[] values, string action);
-
-        protected IHandler _nextInLine;
+        public abstract double Handle(double[] values, string action);
     }
+    
+// Các mối quan hệ dây chuyền được thành lập. Class kế thừa override Handler từ cha nó.
 public class AdditionHandler : BaseHandler {
         public override double Handle(double[] values, string action) {}
 public class MultiplicationHandler : BaseHandler {
-        public override double? Handle(double[] values, string action) {}
+        public override double Handle(double[] values, string action) {}
 ```
+- Không có sự thay đổi so với mẫu chuẩn [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility)
 
+## 2. Command
+- 
  
