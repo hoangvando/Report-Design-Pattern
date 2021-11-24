@@ -3,9 +3,9 @@
 - Nguyễn Duy Đường - 19020266
 - Hoàng Văn Đô - 19020251
 
-## Link
-* Link Github Project: https://github.com/abishekaditya/DesignPatterns
-* Link mẫu chuẩn: https://refactoring.guru/design-patterns/java
+>## Link
+>* Link Repo: https://github.com/abishekaditya/DesignPatterns
+>* Link mẫu chuẩn: https://refactoring.guru/design-patterns/java
 # 1. Creational Patterns
 ## 1.1 Abstract Factory
 - Là một mẫu thiết kế sáng tạo cho phép bạn tạo ra các họ các đối tượng liên quan mà không cần chỉ định các lớp cụ thể của chúng.
@@ -593,4 +593,4 @@ Kết luận: Tương đồng với mẫu thiết ké nhưng chưa thể hiện 
 Kết luận: hoàn toàn tương đồng với mẫu thiết kế, không có sự khác biệt.
 
 
-# Kết Luận: **Tất cả các mẫu thiết kế trên giống, không có nhiều thay đổi so với 23 mẫu thiết kế chuẩn**
+# Kết Luận chung: **Tất cả các mẫu thiết kế trên đều giống, không có nhiều thay đổi so với 23 mẫu thiết kế chuẩn.**
