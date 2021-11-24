@@ -226,3 +226,38 @@ Ví dụ với 2 client WildTurkey và TurkeyAdapter
 ```
 
 Kết luận: hoàn toàn tương đồng so với mẫu thiết kế Adapte, sử dụng adapter để chuyển đổi một instance để phù hợp với service;
+
+## 3.2 Bridge
+
+Được sử dụng trong [BridgePattern.](https://github.com/abishekaditya/DesignPatterns/tree/master/BridgePattern)
+
+Các implementation gồm IEnchantment và IWeapon:
+```
+    public interface IEnchantment
+    {
+        void OnActivate();
+        void Apply();
+        void OnDeactivate();
+    }
+  
+    public interface IWeapon
+    {
+        void Wield();
+        void Swing();
+        void Unwield();
+        IEnchantment GetEnchantment();
+    }
+```
+Các instance của IEnchantment: SoulEatingEnchantment FlyingEnchantment.
+Các instance của IWeapon: Sword, Hammer.
+
+Author đã sử dụng 2 bridge để quán lý 2 thể loại vũ khí là bùa mê (Enchantment) và vũ khí vật lý (Weapon). Các intance sẽ cho biết cách sử dụng và hiệu ứng của từng loại. Giống với mẫu Brigde
+
+Điểm khác: Author có kết hợp sử dụng thêm mẫu Adapter để chuyển đổi IWeapon sang IEnchantment.
+```
+    public interface IWeapon
+    {
+        ...
+        IEnchantment GetEnchantment();
+    }
+```
