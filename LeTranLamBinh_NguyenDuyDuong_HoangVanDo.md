@@ -164,3 +164,65 @@ v.v.....
 ```
 - Tất cả các class GarageDoorCloseCommand, GarageDoorOpenCommand, LightOffCommand, LightOnCommand, MacroCommand, NoCommand, .... đều đưuọc xác định từ ICommand nhưng là những đối tượng độc lập, chứa các yêu cầu Execute(), Undo().
 - Không có thay đổi so với mẫu chuẩn [Command](https://refactoring.guru/design-patterns/command)
+
+ # 3. Structural Patterns
+ ## 3.1 Adapter
+ 
+Được sử dụng trong [AdaptePattern.](https://github.com/abishekaditya/DesignPatterns/tree/master/AdapterPattern)
+
+Các client interface:
+IDuck.cs:
+```
+	public interface IDuck
+    {
+        void Quack();
+        void Fly();
+    }
+```
+
+ITurkey.cs:
+```
+public interface ITurkey
+    {
+        void Gobble();
+        void Fly();
+    }
+```
+Method Tester trong class Program.cs tương ứng là methodService.
+```
+private static void Tester(IDuck duck)
+    {
+        duck.Fly();
+        duck.Quack();
+    }
+```
+
+Môt instance của ITukey muốn sử dụng Tester phải chuyển đổi sang IDuck thông qua class TurkeyAdapter:
+```
+    public class TurkeyAdapter : IDuck
+    {
+    ...
+        public void Quack()
+        {
+             ...
+        }
+
+        public void Fly()
+        {
+            ...
+        }
+    }
+```
+Ví dụ với 2 client WildTurkey và TurkeyAdapter
+
+```
+    private static void Main()
+    {
+        var turkey = new WildTurkey();
+        var adapter = new TurkeyAdapter(turkey);
+
+        Tester(adapter);
+    }
+```
+
+Kết luận: hoàn toàn tương đồng so với mẫu thiết kế Adapte, sử dụng adapter để chuyển đổi một instance để phù hợp với service;
