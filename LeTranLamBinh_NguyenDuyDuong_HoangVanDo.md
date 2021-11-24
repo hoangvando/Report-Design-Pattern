@@ -76,6 +76,7 @@ class Rectangle : IFigure
  
  ## 5. Singleton
  - Singleton cho phép đảm bảo rằng một lớp chỉ có một thể hiện, đồng thời cung cấp một điểm truy cập toàn cục cho thể hiện này.
+ - Code: [Singleton](https://github.com/abishekaditya/DesignPatterns/tree/master/SingletonPattern)
  - Class `ChocolateBoiler` được khởi tạo là `internal partial class ChocolateBoiler`, bên trong là phương thức khởi tạo tĩnh và phương thức khởi tạo private.
  ```
  internal partial class ChocolateBoiler
@@ -108,5 +109,25 @@ class Rectangle : IFigure
  # Behavioral Patterns
  ## 1. Chain of Responsibility
  - cho phép chuyển các yêu cầu dọc theo một chuỗi các trình xử lý. Khi nhận được yêu cầu, mỗi trình xử lý sẽ quyết định xử lý yêu cầu hoặc chuyển nó cho trình xử lý tiếp theo trong chuỗi.
- - 
+ - Code: 
+ ```
+public interface IHandler {
+        void AddChain(IHandler handler);
+        double? Handle(double[] values, string action);
+    }
+public abstract class BaseHandler : IHandler {
+        public void AddChain(IHandler handler) {
+            _nextInLine = handler;    
+        }
+
+        public abstract double? Handle(double[] values, string action);
+
+        protected IHandler _nextInLine;
+    }
+public class AdditionHandler : BaseHandler {
+        public override double Handle(double[] values, string action) {}
+public class MultiplicationHandler : BaseHandler {
+        public override double? Handle(double[] values, string action) {}
+```
+
  
